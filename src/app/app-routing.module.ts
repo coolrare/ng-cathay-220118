@@ -9,7 +9,10 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/dashboard' },
   { path: 'page1', component: Page1Component },
   { path: 'page2', component: Page2Component },
-  { path: 'dashboard', component: DashboardComponent }
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'utilities',
+    loadChildren: () => import('./utilities/utilities.module').then(m => m.UtilitiesModule)
+  }
 ];
 
 @NgModule({
