@@ -44,7 +44,12 @@ export class ColorsComponent implements OnInit {
   }
 
   goType2(id: number) {
-    this.router.navigate(['/utilities/colors', (this.type + id)]);
+    this.router.navigate(['/utilities/colors', (this.type + id)], {
+      queryParamsHandling: 'merge',
+      queryParams: {
+        name: 'John'
+      }
+    });
   }
 
 }
