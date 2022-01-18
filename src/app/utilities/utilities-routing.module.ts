@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ColorsComponent } from './colors/colors.component';
 
 const routes: Routes = [
-  { path: 'colors', component: ColorsComponent },
+  { path: 'colors/:type', component: ColorsComponent },
 ];
 
 @NgModule({
