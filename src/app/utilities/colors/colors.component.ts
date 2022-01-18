@@ -7,7 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ColorsComponent implements OnInit {
 
-  type: string | null = '';
+  type = 0;
 
   name: string | null = '';
 
@@ -18,7 +18,7 @@ export class ColorsComponent implements OnInit {
 
     this.route.paramMap.subscribe({
       next: (params) => {
-        this.type = params.get('type');
+        this.type = +(params.get('type') ?? 0);
       }
     });
 
@@ -37,6 +37,14 @@ export class ColorsComponent implements OnInit {
       }
     });
 
+  }
+
+  goType1(id: number) {
+    this.router.navigateByUrl('/utilities/colors/' + (this.type + id));
+  }
+
+  goType2(id: number) {
+    this.router.navigate(['/utilities/colors', (this.type + id)]);
   }
 
 }
