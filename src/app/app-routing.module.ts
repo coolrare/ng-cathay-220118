@@ -13,9 +13,10 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
+    canActivateChild: [AuthGuard],
     children: [
       { path: '', pathMatch: 'full', redirectTo: '/dashboard' },
-      { path: 'page1', component: Page1Component, canActivate: [AuthGuard] },
+      { path: 'page1', component: Page1Component },
       { path: 'page2', component: Page2Component },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'utilities',
@@ -28,6 +29,7 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
     useHash: true,
+    enableTracing: false,
     preloadingStrategy: PreloadAllModules
   })],
   exports: [RouterModule]
