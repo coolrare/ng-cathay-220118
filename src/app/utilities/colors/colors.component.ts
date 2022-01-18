@@ -9,6 +9,8 @@ export class ColorsComponent implements OnInit {
 
   type: string | null = '';
 
+  name: string | null = '';
+
   constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -26,6 +28,15 @@ export class ColorsComponent implements OnInit {
     //     this.type = params['type'];
     //   }
     // });
+
+    // this.name = this.route.snapshot.queryParamMap.get('name');
+
+    this.route.queryParamMap.subscribe({
+      next: (params) => {
+        this.name = params.get('name');
+      }
+    });
+
   }
 
 }
