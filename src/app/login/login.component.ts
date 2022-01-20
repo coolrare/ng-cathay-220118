@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NgForm, NgModel } from '@angular/forms';
 
 @Component({
   templateUrl: './login.component.html',
@@ -7,8 +8,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit, OnDestroy {
 
   data: Login = {
-    email: 'user@example.com',
-    password: '123123',
+    email: '',
+    password: '',
     isRemember: true
   };
 
@@ -23,6 +24,16 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     document.body.className = this.orig_body_class;
+  }
+
+  doSubmit(form: NgForm) {
+    if (form.valid) {
+      console.log('Form Submitted');
+    }
+  }
+
+  isValidateForm(c: NgModel, f: NgForm) {
+    return (c.touched || f.submitted);
   }
 
 }

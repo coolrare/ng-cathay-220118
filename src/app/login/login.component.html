@@ -13,7 +13,18 @@
                   <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                 </div>
                 <pre>data = {{data|json}}</pre>
-                <form class="user">
+<pre>f.value = {{f.value | json}}
+f.valid = {{f.valid}}
+f.invalid = {{f.invalid}}
+f.pristine = {{f.pristine}}
+f.dirty = {{f.dirty}}
+f.touched = {{f.touched}}
+f.untouched = {{f.untouched}}
+f.enabled = {{f.enabled}}
+f.disabled = {{f.disabled}}
+f.errors = {{f.errors|json}}
+f.submitted = {{f.submitted}}</pre>
+                <form class="user" #f="ngForm" (ngSubmit)="doSubmit(f)">
                   <div class="form-group">
                     <input
                       type="email"
@@ -26,11 +37,11 @@
                       required
                       minlength="5"
                       email
-                      [class.is-invalid]="mEmail.invalid"
-                      [class.is-valid]="mEmail.valid"
+                      [class.is-invalid]="isValidateForm(mEmail, f) && mEmail.invalid"
+                      [class.is-valid]="isValidateForm(mEmail, f) && mEmail.valid"
                     />
 
-                    <div *ngIf="mEmail.invalid" [class.invalid-feedback]="mEmail.invalid">
+                    <div *ngIf="isValidateForm(mEmail, f) && mEmail.invalid" [class.invalid-feedback]="mEmail.invalid">
                       <ng-container *ngIf="mEmail.errors?.['required']; else elseTemplate">
                         請輸入 E-mail 帳號
                       </ng-container>
