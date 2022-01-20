@@ -12,7 +12,19 @@
                 <div class="text-center">
                   <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                 </div>
-                <form class="user">
+                <pre>data = {{data|json}}</pre>
+<pre>form.value = {{form.value | json}}
+form.valid = {{form.valid}}
+form.invalid = {{form.invalid}}
+form.pristine = {{form.pristine}}
+form.dirty = {{form.dirty}}
+form.touched = {{form.touched}}
+form.untouched = {{form.untouched}}
+form.enabled = {{form.enabled}}
+form.disabled = {{form.disabled}}
+form.errors = {{form.errors|json}}
+f.submitted = {{f.submitted}}</pre>
+                <form class="user" [formGroup]="form" #f="ngForm">
                   <div class="form-group">
                     <input
                       type="email"
@@ -20,6 +32,7 @@
                       id="exampleInputEmail"
                       aria-describedby="emailHelp"
                       placeholder="Enter Email Address..."
+                      formControlName="email"
                     />
                   </div>
                   <div class="form-group">
@@ -28,6 +41,7 @@
                       class="form-control form-control-user"
                       id="exampleInputPassword"
                       placeholder="Password"
+                      formControlName="password"
                     />
                   </div>
                   <div class="form-group">
@@ -36,6 +50,7 @@
                         type="checkbox"
                         class="custom-control-input"
                         id="customCheck"
+                        formControlName="isRemember"
                       />
                       <label class="custom-control-label" for="customCheck"
                         >Remember Me</label
