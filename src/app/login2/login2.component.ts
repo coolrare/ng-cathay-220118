@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   templateUrl: './login2.component.html',
@@ -119,8 +119,8 @@ export class Login2Component implements OnInit, OnDestroy {
     }
   }
 
-  isValidateForm(controlName: string) {
-    return this.form.get(controlName)?.touched;
+  isValidateForm(controlName: string, group: AbstractControl | FormGroup) {
+    return group.get(controlName)?.touched;
   }
 }
 

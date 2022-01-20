@@ -36,16 +36,15 @@ f.submitted = {{f.submitted}}</pre>
                           <input
                             type="email"
                             class="form-control form-control-user"
-                            id="exampleInputEmail"
                             aria-describedby="emailHelp"
                             placeholder="Enter Email Address..."
                             formControlName="email"
-                            [class.is-invalid]="isValidateForm('email') && form.get('email')?.invalid"
-                            [class.is-valid]="isValidateForm('email') && form.get('email')?.valid"
+                            [class.is-invalid]="isValidateForm('email', group) && group.get('email')?.invalid"
+                            [class.is-valid]="isValidateForm('email', group) && group.get('email')?.valid"
                           />
 
-                          <div *ngIf="isValidateForm('email') && form.get('email')?.invalid" [class.invalid-feedback]="form.get('email')?.invalid">
-                            <ng-container *ngIf="form.get('email')?.errors?.['required']; else elseTemplate">
+                          <div *ngIf="isValidateForm('email', group) && group.get('email')?.invalid" [class.invalid-feedback]="group.get('email')?.invalid">
+                            <ng-container *ngIf="group.get('email')?.errors?.['required']; else elseTemplate">
                               請輸入 E-mail 帳號
                             </ng-container>
                             <ng-template #elseTemplate>
@@ -58,15 +57,14 @@ f.submitted = {{f.submitted}}</pre>
                           <input
                             type="password"
                             class="form-control form-control-user"
-                            id="exampleInputPassword"
                             placeholder="Password"
                             formControlName="password"
-                            [class.is-invalid]="isValidateForm('password') && form.get('password')?.invalid"
-                            [class.is-valid]="isValidateForm('password') && form.get('password')?.valid"
+                            [class.is-invalid]="isValidateForm('password', group) && group.get('password')?.invalid"
+                            [class.is-valid]="isValidateForm('password', group) && group.get('password')?.valid"
                           />
 
-                          <div *ngIf="isValidateForm('password') && form.get('password')?.invalid" [class.invalid-feedback]="form.get('password')?.invalid">
-                            <ng-container *ngIf="form.get('password')?.errors?.['required']; else elseTemplate2">
+                          <div *ngIf="isValidateForm('password', group) && group.get('password')?.invalid" [class.invalid-feedback]="group.get('password')?.invalid">
+                            <ng-container *ngIf="group.get('password')?.errors?.['required']; else elseTemplate2">
                               請輸入密碼
                             </ng-container>
                             <ng-template #elseTemplate2>
