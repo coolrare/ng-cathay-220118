@@ -24,7 +24,7 @@ form.enabled = {{form.enabled}}
 form.disabled = {{form.disabled}}
 form.errors = {{form.errors|json}}
 f.submitted = {{f.submitted}}</pre>
-                <form class="user" [formGroup]="form" #f="ngForm">
+                <form class="user" [formGroup]="form" #f="ngForm" (ngSubmit)="doSubmit()">
                   <div class="form-group">
                     <input
                       type="email"
@@ -33,7 +33,29 @@ f.submitted = {{f.submitted}}</pre>
                       aria-describedby="emailHelp"
                       placeholder="Enter Email Address..."
                       formControlName="email"
+                      [class.is-invalid]="isValidateForm('email') && form.get('email')?.invalid"
+                      [class.is-valid]="isValidateForm('email') && form.get('email')?.valid"
                     />
+
+                    <div *ngIf="isValidateForm('email') && form.get('email')?.invalid" [class.invalid-feedback]="form.get('email')?.invalid">
+                      <ng-container *ngIf="form.get('email')?.errors?.['required']; else elseTemplate">
+                        請輸入 E-mail 帳號
+                      </ng-container>
+                      <ng-template #elseTemplate>
+                        請輸入合法的 E-mail 地址格式
+                      </ng-template>
+                    </div>
+
+<pre>form.get('email')?.value = {{form.get('email')?.value}}
+form.get('email')?.valid = {{form.get('email')?.valid}}
+form.get('email')?.invalid = {{form.get('email')?.invalid}}
+form.get('email')?.pristine = {{form.get('email')?.pristine}}
+form.get('email')?.dirty = {{form.get('email')?.dirty}}
+form.get('email')?.touched = {{form.get('email')?.touched}}
+form.get('email')?.untouched = {{form.get('email')?.untouched}}
+form.get('email')?.enabled = {{form.get('email')?.enabled}}
+form.get('email')?.disabled = {{form.get('email')?.disabled}}
+form.get('email')?.errors = {{form.get('email')?.errors|json}}</pre>
                   </div>
                   <div class="form-group">
                     <input
