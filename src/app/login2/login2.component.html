@@ -64,7 +64,19 @@ form.get('email')?.errors = {{form.get('email')?.errors|json}}</pre>
                       id="exampleInputPassword"
                       placeholder="Password"
                       formControlName="password"
+                      [class.is-invalid]="isValidateForm('password') && form.get('password')?.invalid"
+                      [class.is-valid]="isValidateForm('password') && form.get('password')?.valid"
                     />
+
+                    <div *ngIf="isValidateForm('password') && form.get('password')?.invalid" [class.invalid-feedback]="form.get('password')?.invalid">
+                      <ng-container *ngIf="form.get('password')?.errors?.['required']; else elseTemplate2">
+                        請輸入密碼
+                      </ng-container>
+                      <ng-template #elseTemplate2>
+                        請輸入具有複雜度要求的密碼
+                      </ng-template>
+                    </div>
+
                   </div>
                   <div class="form-group">
                     <div class="custom-control custom-checkbox small">

@@ -41,10 +41,12 @@ export class Login2Component implements OnInit, OnDestroy {
         Validators.required,
         Validators.email,
         Validators.minLength(5),
+        Validators.pattern(/^[a-zA-Z0-9@_\-\.]+$/),
       ]),
 
       password: this.fb.control('123123', [
-        Validators.required
+        Validators.required,
+        Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,30}$/)
       ]),
 
       isRemember: true,
