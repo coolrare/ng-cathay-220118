@@ -7,9 +7,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { LayoutComponent } from './layout/layout.component';
 import { AuthGuard } from './auth.guard';
+import { Login2Component } from './login2/login2.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'login2', component: Login2Component },
   {
     path: '',
     component: LayoutComponent,
