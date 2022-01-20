@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 
 @Component({
   templateUrl: './login2.component.html',
@@ -95,7 +95,7 @@ export class Login2Component implements OnInit, OnDestroy {
 
       password: this.fb.control('', [
         Validators.required,
-        Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,30}$/),
+        PasswordComplexityValidator,
       ]),
 
     });
@@ -135,4 +135,48 @@ export interface Login {
 export interface Account {
   email:      string;
   password:   string;
+}
+
+function PasswordComplexityValidator(c: AbstractControl): ValidationErrors | null {
+  if (!c.value) {
+    return null;
+  }
+
+  let value = c.value as string;
+
+  let validationStatus = true;
+  let result: any = {};
+
+  // 至少有一個數字
+  let pattern1 = /\d+/
+  if (value.search(pattern1) == -1) {
+    result.number = true;
+    validationStatus = false;
+  }
+  // 至少有一個小寫英文字母
+  let pattern2 = /[a-z]+/
+  if (value.search(pattern2) == -1) {
+    result.lowercase = true;
+    validationStatus = false;
+  }
+  // 至少有一個大寫英文字母
+  let pattern3 = /[A-Z]+/
+  if (value.search(pattern3) == -1) {
+    result.uppercase = true;
+    validationStatus = false;
+  }
+  // 字串長度在 6 ~ 30 個字母之間
+  let pattern4 = /^.{6,30}$/
+  if (value.search(pattern4) == -1) {
+    result.length = true;
+    validationStatus = false;
+  }
+
+  if (validationStatus) {
+    return null;
+  } else {
+    return {
+      passwordComplexity: result
+    };
+  }
 }

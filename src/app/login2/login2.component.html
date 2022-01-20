@@ -63,12 +63,17 @@ f.submitted = {{f.submitted}}</pre>
                             [class.is-valid]="isValidateForm('password', group) && group.get('password')?.valid"
                           />
 
+                          <pre>{{ group.get('password')?.errors | json }}</pre>
+
                           <div *ngIf="isValidateForm('password', group) && group.get('password')?.invalid" [class.invalid-feedback]="group.get('password')?.invalid">
                             <ng-container *ngIf="group.get('password')?.errors?.['required']; else elseTemplate2">
                               請輸入密碼
                             </ng-container>
                             <ng-template #elseTemplate2>
-                              請輸入具有複雜度要求的密碼
+                              <div *ngIf="group.get('password')?.errors?.['passwordComplexity']?.number">❌ 至少有一個數字</div>
+                              <div *ngIf="group.get('password')?.errors?.['passwordComplexity']?.lowercase">❌ 至少有一個小寫英文字母</div>
+                              <div *ngIf="group.get('password')?.errors?.['passwordComplexity']?.uppercase">❌ 至少有一個大寫英文字母</div>
+                              <div *ngIf="group.get('password')?.errors?.['passwordComplexity']?.length">❌ 字串長度在 6 ~ 30 個字母之間</div>
                             </ng-template>
                           </div>
 
