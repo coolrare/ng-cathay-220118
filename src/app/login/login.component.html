@@ -29,6 +29,16 @@
                       [class.is-invalid]="mEmail.invalid"
                       [class.is-valid]="mEmail.valid"
                     />
+
+                    <div *ngIf="mEmail.invalid" [class.invalid-feedback]="mEmail.invalid">
+                      <ng-container *ngIf="mEmail.errors?.['required']; else elseTemplate">
+                        請輸入 E-mail 帳號
+                      </ng-container>
+                      <ng-template #elseTemplate>
+                        請輸入合法的 E-mail 地址格式
+                      </ng-template>
+                    </div>
+
 <pre>mEmail.value = {{mEmail.value}}
 mEmail.valid = {{mEmail.valid}}
 mEmail.invalid = {{mEmail.invalid}}
