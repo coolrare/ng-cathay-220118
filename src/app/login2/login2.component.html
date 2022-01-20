@@ -25,49 +25,61 @@ form.disabled = {{form.disabled}}
 form.errors = {{form.errors|json}}
 f.submitted = {{f.submitted}}</pre>
                 <form class="user" [formGroup]="form" #f="ngForm" (ngSubmit)="doSubmit()">
-                  <div class="form-group">
-                    <input
-                      type="email"
-                      class="form-control form-control-user"
-                      id="exampleInputEmail"
-                      aria-describedby="emailHelp"
-                      placeholder="Enter Email Address..."
-                      formControlName="email"
-                      [class.is-invalid]="isValidateForm('email') && form.get('email')?.invalid"
-                      [class.is-valid]="isValidateForm('email') && form.get('email')?.valid"
-                    />
 
-                    <div *ngIf="isValidateForm('email') && form.get('email')?.invalid" [class.invalid-feedback]="form.get('email')?.invalid">
-                      <ng-container *ngIf="form.get('email')?.errors?.['required']; else elseTemplate">
-                        請輸入 E-mail 帳號
+                  <ng-container formArrayName="accounts">
+
+                      <ng-container *ngFor="let group of formArray('accounts').controls; let i=index" [formGroupName]="i">
+
+                        {{i}}
+
+                        <div class="form-group">
+                          <input
+                            type="email"
+                            class="form-control form-control-user"
+                            id="exampleInputEmail"
+                            aria-describedby="emailHelp"
+                            placeholder="Enter Email Address..."
+                            formControlName="email"
+                            [class.is-invalid]="isValidateForm('email') && form.get('email')?.invalid"
+                            [class.is-valid]="isValidateForm('email') && form.get('email')?.valid"
+                          />
+
+                          <div *ngIf="isValidateForm('email') && form.get('email')?.invalid" [class.invalid-feedback]="form.get('email')?.invalid">
+                            <ng-container *ngIf="form.get('email')?.errors?.['required']; else elseTemplate">
+                              請輸入 E-mail 帳號
+                            </ng-container>
+                            <ng-template #elseTemplate>
+                              請輸入合法的 E-mail 地址格式
+                            </ng-template>
+                          </div>
+
+                        </div>
+                        <div class="form-group">
+                          <input
+                            type="password"
+                            class="form-control form-control-user"
+                            id="exampleInputPassword"
+                            placeholder="Password"
+                            formControlName="password"
+                            [class.is-invalid]="isValidateForm('password') && form.get('password')?.invalid"
+                            [class.is-valid]="isValidateForm('password') && form.get('password')?.valid"
+                          />
+
+                          <div *ngIf="isValidateForm('password') && form.get('password')?.invalid" [class.invalid-feedback]="form.get('password')?.invalid">
+                            <ng-container *ngIf="form.get('password')?.errors?.['required']; else elseTemplate2">
+                              請輸入密碼
+                            </ng-container>
+                            <ng-template #elseTemplate2>
+                              請輸入具有複雜度要求的密碼
+                            </ng-template>
+                          </div>
+
+                        </div>
+
                       </ng-container>
-                      <ng-template #elseTemplate>
-                        請輸入合法的 E-mail 地址格式
-                      </ng-template>
-                    </div>
 
-                  </div>
-                  <div class="form-group">
-                    <input
-                      type="password"
-                      class="form-control form-control-user"
-                      id="exampleInputPassword"
-                      placeholder="Password"
-                      formControlName="password"
-                      [class.is-invalid]="isValidateForm('password') && form.get('password')?.invalid"
-                      [class.is-valid]="isValidateForm('password') && form.get('password')?.valid"
-                    />
+                  </ng-container>
 
-                    <div *ngIf="isValidateForm('password') && form.get('password')?.invalid" [class.invalid-feedback]="form.get('password')?.invalid">
-                      <ng-container *ngIf="form.get('password')?.errors?.['required']; else elseTemplate2">
-                        請輸入密碼
-                      </ng-container>
-                      <ng-template #elseTemplate2>
-                        請輸入具有複雜度要求的密碼
-                      </ng-template>
-                    </div>
-
-                  </div>
                   <div class="form-group">
                     <div class="custom-control custom-checkbox small">
                       <input
@@ -81,6 +93,15 @@ f.submitted = {{f.submitted}}</pre>
                       >
                     </div>
                   </div>
+
+                  <button
+                    type="button"
+                    class="btn btn-default btn-user btn-block"
+                    (click)="addNewAccount()"
+                  >
+                    新增帳號
+                  </button>
+
                   <button
                     class="btn btn-primary btn-user btn-block"
                   >

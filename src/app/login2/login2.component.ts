@@ -1,6 +1,6 @@
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   templateUrl: './login2.component.html',
@@ -36,7 +36,36 @@ export class Login2Component implements OnInit, OnDestroy {
     //   isRemember: true,
     // });
 
+    // this.form = this.fb.group({
+    //   email: this.fb.control('user@example.com', [
+    //     Validators.required,
+    //     Validators.email,
+    //     Validators.minLength(5),
+    //     Validators.pattern(/^[a-zA-Z0-9@_\-\.]+$/),
+    //   ]),
+
+    //   password: this.fb.control('123123', [
+    //     Validators.required,
+    //     Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,30}$/)
+    //   ]),
+
+    //   isRemember: true,
+    // });
+
     this.form = this.fb.group({
+
+      accounts: this.fb.array([
+        this.createAccountGroup(),
+        this.createAccountGroup(),
+      ])
+
+    });
+
+  }
+
+  createAccountGroup() {
+    return this.fb.group({
+
       email: this.fb.control('user@example.com', [
         Validators.required,
         Validators.email,
@@ -51,7 +80,14 @@ export class Login2Component implements OnInit, OnDestroy {
 
       isRemember: true,
     });
+  }
 
+  formArray(name: string) {
+    return this.form.get(name) as FormArray;
+  }
+
+  addNewAccount() {
+    this.formArray('accounts').push(this.createAccountGroup());
   }
 
   ngOnDestroy(): void {
