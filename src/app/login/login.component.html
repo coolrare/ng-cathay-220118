@@ -71,6 +71,49 @@ mEmail.errors = {{mEmail.errors|json}}</pre>
                       #mPassword="ngModel"
                     />
                   </div>
+                  <div class="form-group" ngModelGroup="add1" #mAdd1="ngModelGroup">
+                    <input
+                      type="text"
+                      class="form-control form-control-user"
+                      placeholder="地址 1"
+                      name="address1"
+                      [(ngModel)]="data.address1"
+                      #mAddress1="ngModel"
+                      required
+                    />
+
+<pre>mAdd1.value = {{mAdd1.value|json}}
+mAdd1.valid = {{mAdd1.valid}}
+mAdd1.invalid = {{mAdd1.invalid}}
+mAdd1.pristine = {{mAdd1.pristine}}
+mAdd1.dirty = {{mAdd1.dirty}}
+mAdd1.touched = {{mAdd1.touched}}
+mAdd1.untouched = {{mAdd1.untouched}}
+mAdd1.enabled = {{mAdd1.enabled}}
+mAdd1.disabled = {{mAdd1.disabled}}
+mAdd1.errors = {{mAdd1.errors|json}}</pre>
+                  </div>
+                  <div class="form-group" ngModelGroup="add2" #mAdd2="ngModelGroup">
+                    <input
+                      type="text"
+                      class="form-control form-control-user"
+                      placeholder="地址 2"
+                      name="address2"
+                      [(ngModel)]="data.address2"
+                      #mAddress2="ngModel"
+                    />
+
+<pre>mAdd2.value = {{mAdd2.value|json}}
+mAdd2.valid = {{mAdd2.valid}}
+mAdd2.invalid = {{mAdd2.invalid}}
+mAdd2.pristine = {{mAdd2.pristine}}
+mAdd2.dirty = {{mAdd2.dirty}}
+mAdd2.touched = {{mAdd2.touched}}
+mAdd2.untouched = {{mAdd2.untouched}}
+mAdd2.enabled = {{mAdd2.enabled}}
+mAdd2.disabled = {{mAdd2.disabled}}
+mAdd2.errors = {{mAdd2.errors|json}}</pre>
+                  </div>
                   <div class="form-group">
                     <div class="custom-control custom-checkbox small">
                       <input

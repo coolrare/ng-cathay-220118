@@ -10,7 +10,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   data: Login = {
     email: '',
     password: '',
-    isRemember: true
+    isRemember: true,
+    address1: '',
+    address2: '',
   };
 
   orig_body_class = '';
@@ -44,4 +46,6 @@ export interface Login {
   email:      string;
   password:   string;
   isRemember: boolean;
+  address1: string;
+  address2: string;
 }
