@@ -74,16 +74,26 @@ export class Login2Component implements OnInit, OnDestroy {
     this.form.setValue(this.data);
   }
 
+  resetForm() {
+    this.formArray('accounts').clear();
+
+    for (let index = 0; index < this.data.accounts.length; index++) {
+      this.formArray('accounts').push(this.createAccountGroup());
+    }
+
+    this.form.reset(this.data);
+  }
+
   createAccountGroup() {
     return this.fb.group({
-      email: this.fb.control('user@example.com', [
+      email: this.fb.control('', [
         Validators.required,
         Validators.email,
         Validators.minLength(5),
         Validators.pattern(/^[a-zA-Z0-9@_\-\.]+$/),
       ]),
 
-      password: this.fb.control('123123', [
+      password: this.fb.control('', [
         Validators.required,
         Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,30}$/),
       ]),
