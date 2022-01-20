@@ -12,6 +12,7 @@
                 <div class="text-center">
                   <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                 </div>
+                <pre>data = {{data|json}}</pre>
                 <form class="user">
                   <div class="form-group">
                     <input
@@ -22,7 +23,22 @@
                       name="email"
                       [(ngModel)]="data.email"
                       #mEmail="ngModel"
+                      required
+                      minlength="5"
+                      email
+                      [class.is-invalid]="mEmail.invalid"
+                      [class.is-valid]="mEmail.valid"
                     />
+<pre>mEmail.value = {{mEmail.value}}
+mEmail.valid = {{mEmail.valid}}
+mEmail.invalid = {{mEmail.invalid}}
+mEmail.pristine = {{mEmail.pristine}}
+mEmail.dirty = {{mEmail.dirty}}
+mEmail.touched = {{mEmail.touched}}
+mEmail.untouched = {{mEmail.untouched}}
+mEmail.enabled = {{mEmail.enabled}}
+mEmail.disabled = {{mEmail.disabled}}
+mEmail.errors = {{mEmail.errors|json}}</pre>
                   </div>
                   <div class="form-group">
                     <input
